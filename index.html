@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TaskDestiny</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="sidebar">
+      <h1>TaskDestiny</h1>
+      <p class="tagline">Your tasks know where you’re headed — I just help you remember them along the way</p>
+
+      <form id="taskForm" class="form-box">
+        <h3>➕ Add Task</h3>
+        <input type="text" id="placeInput" placeholder="📍 Location..." required />
+        <input type="text" id="taskInput" placeholder="📝 Task..." required />
+        <button type="submit">Add Task</button>
+      </form>
+
+      <form id="routeForm" class="form-box">
+        <h3>🚗 Plan Route</h3>
+        <input type="text" id="destinationInput" placeholder="Enter destination..." required />
+        <button type="submit">Show Route & Tasks</button>
+      </form>
+
+      <div class="task-tabs">
+        <button id="showPending" class="tab-button active">Pending</button>
+        <button id="showCompleted" class="tab-button">Completed</button>
+      </div>
+
+    </aside>
+
+    <main class="map-panel">
+      <div id="map"></div>
+    </main>
+  </div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-app.js";
+    import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/11.6.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyD7Nv8h5t5i_kf6lo6UGLdogCCye17cMxc",
+      authDomain: "taskdestiny-8e819.firebaseapp.com",
+      projectId: "taskdestiny-8e819",
+      storageBucket: "taskdestiny-8e819.appspot.com",
+      messagingSenderId: "333548467523",
+      appId: "1:333548467523:web:47db06a7a21227acfc2bf6"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    window.db = db;
+    window.addDoc = addDoc;
+    window.collection = collection;
+    window.getDocs = getDocs;
+
+    const script = document.createElement("script");
+    script.src = "script.js";
+    document.body.appendChild(script);
+  </script>
+</body>
+</html>
